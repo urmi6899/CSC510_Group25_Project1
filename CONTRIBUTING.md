@@ -56,6 +56,20 @@ Please follow these steps to have your contribution considered by the maintainer
 
 While the prerequisites above must be satisfied prior to having your pull request reviewed, the reviewer(s) may ask you to complete additional design work, tests, or other changes before your pull request can be ultimately accepted.
 
+## Commit guide
+
+All commit messages must follow the [conventional commit specification](https://www.conventionalcommits.org/en/v1.0.0/). This helps others to easily understand commit logs and allows for automated changelog generation. Here's an example of a commit message that follows the conventional commit spec
+
+    feat: allow provided config object to extend other configs
+
+In general, the messages must follow the following syntax
+
+    <type>[optional scope]: <description>
+
+    [optional body]
+
+    [optional footer(s)]
+
 ## Attribution
 This Contribution conduct was adapted from [Contributing to Atom][contrib].
 
