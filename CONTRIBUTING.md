@@ -24,10 +24,7 @@ We have created labels for each issue for proper ordering and this will help you
 
 - The [`Good first issue` label](https://github.com/ashakhatri007/CSC510_Group25_Project1/projects/1?card_filter_query=label%3A%22good+first+issue%22) Indicates a good issue for first-time contributors.
 
-- The [`tests` label](https://github.com/ashakhatri007/CSC510_Group25_Project1/issues?q=is%3Aissue+is%3Aopen+label%3Atests) Indicates a goo
-
-- The [`Release` label](https://github.com/ashakhatri007/CSC510_Group25_Project1/issues?q=is%3Aissue+is%3Aopen+label%3ARelease) Indicates a goo
-
+- The [`tests` label](https://github.com/ashakhatri007/CSC510_Group25_Project1/issues?q=is%3Aissue+is%3Aopen+label%3Atests) Adding missing tests or correcting existing tests
 
 ## Suggesting Enhancements
 
