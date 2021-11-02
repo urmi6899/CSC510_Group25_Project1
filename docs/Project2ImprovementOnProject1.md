@@ -6,10 +6,12 @@ You may choose to associate information with your OpenID that can be shared with
 With OpenID, your password is only given to your identity provider, and that provider then confirms your identity to the websites you visit.  Other than your provider, no website ever sees your password, so you don’t need to worry about an unscrupulous or insecure website compromising your identity.
 <h4>How is OpenID functioning in our application?</h4>
 Its working using the below 4 principles:
-Core: authentication and use of Claims to communicate End-User information
-Discovery: stipulates how a client can dynamically determine information about OpenID Providers
-Dynamic Registration: dictates how a client can register with a provider
-Session Management: defines how to manage OIDC sessions
+
+* <b>Core</b>: authentication and use of Claims to communicate End-User information
+* <b>Discovery</b>: stipulates how a client can dynamically determine information about OpenID Providers
+* <b>Dynamic Registration</b>: dictates how a client can register with a provider
+* <b>Session Management</b>: defines how to manage OIDC sessions
+
 <h4>What are the different configurations and dependencies used in our project?</h4>
 
 ```
