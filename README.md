@@ -84,6 +84,8 @@ MySQL
 ### The user may go to the analytics page to see analysis of how their restaurant is doing monthly
 <img width="1200" alt="signup" src="https://github.com/CSC510-Group-25/CSC510_Group25_Project1/blob/main/docs/graphs_SE.png">
 
+### The user may also update its profile after completing the below form and clicking on "Update"
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Update_profile.png">
 
 ## 🚀 Steps for Running Backend:
 You can directly use Eclipse or Intellj to open up the project and run SpringSocialApplication.java file. You can also the start code from terminal. You need to update sql username and password in spring-social/src/main/resources/application.yml file.
