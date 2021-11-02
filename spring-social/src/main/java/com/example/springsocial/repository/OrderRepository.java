@@ -20,5 +20,5 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
 //    public ResponseEntity<?> addOrder(@Valid, @RequestBody OrderRequest orderRequest)
     List<Order> findAll();
 
-
+    List<Order> findOrderByRestaurantId(String restaurant_id);
 }

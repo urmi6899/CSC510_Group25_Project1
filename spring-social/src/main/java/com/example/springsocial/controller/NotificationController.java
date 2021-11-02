@@ -39,7 +39,7 @@ public class NotificationController {
 
     @PostMapping("/findExpiredInventory")
     public String fetchExpiredInventoryItems(@Valid @RequestBody NotificationExpiredRequest notificationExpiredRequest) {
-        List<Inventory> expiredInventoryItems = inventoryRepository.findInventoryByRestaurantNameAndDateExpiredLessThan(notificationExpiredRequest.restaurant_name, new Date());
+        List<Inventory> expiredInventoryItems = inventoryRepository.findInventoryByRestaurantIDAndDateExpiredLessThan(notificationExpiredRequest.restaurant_id, new Date());
 
         String inventoryItemsExpired = new Gson().toJson(expiredInventoryItems);
 
@@ -56,7 +56,7 @@ public class NotificationController {
 
         logger.info("After date: " + dateAfterNDays.toString());
 
-        List<Inventory> aboutToExpireInventoryItems = inventoryRepository.findInventoryByRestaurantNameAndDateExpiredBetween(notificationAboutToExpireRequest.restaurant_name, new Date(), dateAfterNDays);
+        List<Inventory> aboutToExpireInventoryItems = inventoryRepository.findInventoryByRestaurantIDAndDateExpiredBetween(notificationAboutToExpireRequest.restaurant_id, new Date(), dateAfterNDays);
 
         String aboutToExpireInventoryItemsJSON = new Gson().toJson(aboutToExpireInventoryItems);
 
@@ -67,7 +67,7 @@ public class NotificationController {
     @PostMapping("/findLowQuantityInventoryItems")
     public String fetchLowQuantityInventoryItems(@Valid @RequestBody LowInventoryRequest lowInventoryRequest) {
 
-        List<Inventory> lowQuantityItems = inventoryRepository.findInventoryByRestaurantNameAndBatchQtyLessThanEqual(lowInventoryRequest.restaurant_name, lowInventoryRequest.max_qty);
+        List<Inventory> lowQuantityItems = inventoryRepository.findInventoryByRestaurantIDAndBatchQtyLessThanEqual(lowInventoryRequest.restaurant_id, lowInventoryRequest.max_qty);
 
         String lowQuantityItemsJson = new Gson().toJson(lowQuantityItems);
 

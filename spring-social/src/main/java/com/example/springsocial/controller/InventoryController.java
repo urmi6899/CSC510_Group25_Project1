@@ -58,9 +58,9 @@ public class InventoryController {
     /**
     * This method is used to call all the items in the inventory.
     */
-    public String getAllInventory(){
+    public String getAllInventory(@RequestParam String restaurant_id){
 
-        List<Inventory> inventory =  inventoryRepository.findAll();
+        List<Inventory> inventory =  inventoryRepository.findInventoryByRestaurantID(restaurant_id);
         String inventoryJson = new Gson().toJson(inventory);
         return inventoryJson;
 
