@@ -15,8 +15,15 @@ const useStyles = makeStyles({
   },
 });
 
-export default function MenuPage() {
+export default function MenuPage({currentUser}) {
   const classes = useStyles();
+
+  const [updateMenu, setUpdateMenu] = React.useState(false);
+
+  const handleUpdateMenu = () => {
+    console.log("update menu");
+    setUpdateMenu(!updateMenu);
+  };
 
   return <div>
     <Grid
@@ -28,10 +35,10 @@ export default function MenuPage() {
       style={{ minHeight: '100vh' }}
     >
       <Grid item xs={3}>
-        <MenuForm/>
+        <MenuForm onFormSubmit={handleUpdateMenu} currentUser={currentUser} />
       </Grid>
       <Grid item md={12}>
-        <MenuTable/>
+        <MenuTable updateMenu={updateMenu} currentUser={currentUser} />
       </Grid>
     </Grid>
 </div>

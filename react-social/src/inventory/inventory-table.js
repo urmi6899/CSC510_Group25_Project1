@@ -199,7 +199,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function InventoryTable() {
+export default function InventoryTable(props) {
   const classes = useStyles();
   const [rows, setRows] = React.useState([]);
   const [order, setOrder] = React.useState('asc');
@@ -261,9 +261,8 @@ export default function InventoryTable() {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  useEffect(() => {
-    //get inventory from database
-    fetch(API_BASE_URL + '/getAllInventory', {
+  const fetchInventory = () => {
+    fetch(API_BASE_URL + `/getAllInventory?restaurant_id=${props.currentUser.restaurant_id}`, {
       method: 'Get',
       headers: {
         'Content-Type': 'application/json',
@@ -275,7 +274,17 @@ export default function InventoryTable() {
       }).catch(error => {
       Alert.error((error && error.message) || 'Unable to load inventory');
     });
+  }
+
+  useEffect(() => {
+    //get inventory from database
+    fetchInventory();
   }, []);
+
+  useEffect(() => {
+    //get inventory from database
+    fetchInventory();
+  }, [props.updateInventory]);
 
   return (
     <div className={classes.root}>

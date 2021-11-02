@@ -197,7 +197,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function MenuTable() {
+export default function MenuTable(props) {
   const classes = useStyles();
   const [rows, setRows] = React.useState([]);
   const [order, setOrder] = React.useState('asc');
@@ -259,9 +259,8 @@ export default function MenuTable() {
 
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
-  useEffect(() => {
-    //get inventory from database
-    fetch(API_BASE_URL + '/getAllOrders', {
+  const fetchAllOrders = () => {
+    fetch(API_BASE_URL + `/getAllOrders?restaurant_id=${props.currentUser.restaurant_id}`, {
       method: 'Get',
       headers: {
         'Content-Type': 'application/json',
@@ -273,7 +272,17 @@ export default function MenuTable() {
       }).catch(error => {
       Alert.error((error && error.message) || 'Unable to load menu');
     });
+  }
+
+  useEffect(() => {
+    //get inventory from database
+    fetchAllOrders();
   }, []);
+  
+  useEffect(() => {
+    fetchAllOrders();
+    console.log("fetching all orders again");
+  }, [props.updateMenu]);
 
   return (
     <div className={classes.root}>
@@ -305,11 +314,11 @@ export default function MenuTable() {
                   return (
                     <TableRow
                       hover
+                      key={row.dishId}
                       onClick={(event) => handleClick(event, row.dishName)}
                       role="checkbox"
                       aria-checked={isItemSelected}
                       tabIndex={-1}
-                      key={row.dishName}
                       selected={isItemSelected}
                     >
                       <TableCell padding="checkbox">
