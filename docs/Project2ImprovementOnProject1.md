@@ -1,4 +1,4 @@
-<h1> Feature Improvements</h1>
+<h1> Features </h1>
 <br>
 <h1> Tests </h1>
 <h3>Segregation of qty_calc test cases </h3>
