@@ -28,6 +28,7 @@ import javax.annotation.PostConstruct;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/auth")
@@ -116,6 +117,8 @@ public class AuthController {
         user.setRestaurantName(signUpRequest.getRestaurantName());
         user.setRole(signUpRequest.getRole());
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setRestaurant_id(UUID.randomUUID().toString());
+
         User result = userRepository.save(user);
 
         URI location = ServletUriComponentsBuilder
