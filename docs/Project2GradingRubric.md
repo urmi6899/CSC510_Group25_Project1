@@ -20,6 +20,6 @@
 |.5|other automated analysis tools  | https://github.com/ashakhatri007/CSC510_Group25_Project1/actions| 3|
 |.5|test cases:.a large proportion of the issues related to handling failing cases. | if a test case fails, open an issue and fix it. Created issues and fixed the cases wherein workflow failed. https://github.com/ashakhatri007/CSC510_Group25_Project1/issues/53, https://github.com/ashakhatri007/CSC510_Group25_Project1/issues/40| 3|
 |.5|test cases are routinely executed | https://github.com/ashakhatri007/CSC510_Group25_Project1/actions| 3|
-|1|Documentation describing how this version improves on the older version| |0|
+|1|Documentation describing how this version improves on the older version|https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/docs/Project2ImprovementOnProject1.md |0|
 |3|This version is a little(1), some(2), much(3) improved on the last version.|Tutor's assessment.| 
 |16| Total|
