@@ -46,6 +46,10 @@ We have successfully implemented for google and the rest are for future scope.
 <br>
 <h3>Addition of Code Coverga Badge </h3>
 <p>We added codecov badge in the repo by integrating code cov tool with travis.yml. This badge gives us a good understanding on how well tested our software is. </p>
+<h3>Addition of Prettier for code formatting and syntax checker</h3>
+<p> We used Prettier an opinionated code formatter to enforce a consistent style by parsing our code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
+</p>
+
 
 <br>
 <h1> Documentation </h1>
