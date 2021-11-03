@@ -1,5 +1,5 @@
-<h1> Features </h1>
-<h2>OpenID Login</h2>
+<h1> ✅ Features </h1>
+<h2>💎 OpenID Login</h2>
 <h4>What is OpenID?</h4>
 OpenID allows you to use an existing account to sign in to multiple websites, without needing to create new passwords.
 You may choose to associate information with your OpenID that can be shared with the websites you visit, such as a name or email address. With OpenID, you control how much of that information is shared with the websites you visit.
@@ -38,18 +38,93 @@ spring:
 ```
 
 In our application we want implemented OpenID for clients like Google, Facebook and LinkedIn. 
-We have successfully implemented for google and the rest are for future scope.
+We have successfully implemented for google and the rest are for future scope. The handle submit code for login using google is as below:
 
-<h2>Updating Profile</h2>
+```
+handleSubmit(event) {
+        event.preventDefault();   
+
+        const loginRequest = Object.assign({}, this.state);
+
+        login(loginRequest)
+        .then(response => {
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            Alert.success("You're successfully logged in!");
+            this.props.history.push("/");
+            window.location.reload();
+        }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
+  ```
+<h2>💎 Menu Page</h2>
+
+Menu tab allows the user to see all the restaurant items present for his/her restaurant. We implemented Menu tab to get all available menu items from past orders and create menu item which will be added to the database.
+
+Files added:
+```
+  react-social/src/menu/menu-form.js
+  react-social/src/menu/menu-form.test.js
+  react-social/src/menu/menu-page.js
+  react-social/src/menu/menu-page.test.js
+  react-social/src/menu/menu-table.js
+  react-social/src/menu/menu-table.test.js
+```
+Menu tab:
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/View%20menu.png">
+
+Add Menu item:
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Add%20Menu%20item.png">
+
+
+<h2>💎 Updating Profile</h2>
 
 The update profile page allows to change attributes of the user without changing the essential attributes like email and password , You can change the Name of the user , their role and the name of the resturant that belongs to them.
 
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Update_profile.png">
 
 <br>
-<h1> Tests </h1>
-<h3>Segregation of qty_calc test cases </h3>
+<h1> ✅ Tests </h1>
+<h3>💎 Segregation of qty_calc test cases </h3>
+The Unit tests were all clubbed together making it very difficult to work on feature-specific test cases. We modularised the unit tests to map them to features and thus made the UT infra easily extensible for future group to add -on more test cases as and when new features develop.
+
+Files added:
+```
+  qty_calc/src/test/java/IngredientTests.java
+  qty_calc/src/test/java/ItemTests.java
+  qty_calc/src/test/java/MockDBTests.java
+  qty_calc/src/test/java/OrderTests.java
+  qty_calc/src/test/java/OrderTrackerTests.java
+  qty_calc/src/test/java/RecipeTests.java
+  qty_calc/src/test/java/UnitConverterTests.java
+  qty_calc/src/test/java/VolumeConverterTests.java
+
+```
+
+We used maven sure-fire plugin to run all above added test files:
+```
+  <plugin>
+                  <groupId>org.apache.maven.plugins</groupId>
+                  <artifactId>maven-surefire-plugin</artifactId>
+                  <version>3.0.0-M4</version>
+                  <configuration>
+                      <includes>
+                          <include>UnitConverterTests.java</include>
+                          <include>VolumeConverterTests.java</include>
+                          <include>OrderTrackerTests.java</include>
+                          <include>IngredientTests.java</include>
+                          <include>ItemTests.java</include>
+                          <include>RecipeTests.java</include>
+                          <include>OrderTests.java</include>
+                          <include>MockDBTests.java</include>
+                      </includes>
+                  </configuration>
+  </plugin>
+
+```
+ 
 <br>
-<h3>Addition of Code Coverga Badge </h3>
+<h3>💎 Addition of Code Coverga Badge </h3>
 <p>We added codecov badge in the repo by integrating code cov tool with travis.yml. This badge gives us a good understanding on how well tested our software is. </p>
 <h3>Addition of Prettier for code formatting and syntax checker</h3>
 <p> We used Prettier an opinionated code formatter to enforce a consistent style by parsing our code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
@@ -58,7 +133,7 @@ The update profile page allows to change attributes of the user without changing
 
 
 <br>
-<h1> Documentation </h1>
+<h1> ✅ Documentation </h1>
 
 <br>
-<h1> Bugs </h1>
+<h1> ✅ Bugs </h1>
