@@ -40,6 +40,11 @@ spring:
 In our application we want implemented OpenID for clients like Google, Facebook and LinkedIn. 
 We have successfully implemented for google and the rest are for future scope.
 
+<h2>OpenID Update</h2>
+
+OpenID allows you to change attributes of the user without changing the essential attributes like email and password , You can change the Name of the user , their role and the name of the resturant that belongs to them.
+
+
 <br>
 <h1> Tests </h1>
 <h3>Segregation of qty_calc test cases </h3>
@@ -49,6 +54,7 @@ We have successfully implemented for google and the rest are for future scope.
 <h3>Addition of Prettier for code formatting and syntax checker</h3>
 <p> We used Prettier an opinionated code formatter to enforce a consistent style by parsing our code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
 </p>
+
 
 
 <br>
