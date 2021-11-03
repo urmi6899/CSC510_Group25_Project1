@@ -38,7 +38,44 @@ spring:
 ```
 
 In our application we want implemented OpenID for clients like Google, Facebook and LinkedIn. 
-We have successfully implemented for google and the rest are for future scope.
+We have successfully implemented for google and the rest are for future scope. The handle submit code for login using google is as below:
+
+```
+handleSubmit(event) {
+        event.preventDefault();   
+
+        const loginRequest = Object.assign({}, this.state);
+
+        login(loginRequest)
+        .then(response => {
+            localStorage.setItem(ACCESS_TOKEN, response.accessToken);
+            Alert.success("You're successfully logged in!");
+            this.props.history.push("/");
+            window.location.reload();
+        }).catch(error => {
+            Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+        });
+    }
+  ```
+<h2>Menu Page</h2>
+
+Menu tab allows the user to see all the restaurant items present for his/her restaurant. We implemented Menu tab to get all available menu items from past orders and create menu item which will be added to the database.
+
+Files added:
+```
+  react-social/src/menu/menu-form.js
+  react-social/src/menu/menu-form.test.js
+  react-social/src/menu/menu-page.js
+  react-social/src/menu/menu-page.test.js
+  react-social/src/menu/menu-table.js
+  react-social/src/menu/menu-table.test.js
+```
+Menu tab:
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/View%20menu.png">
+
+Add Menu item:
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Add%20Menu%20item.png">
+
 
 <h2>Updating Profile</h2>
 
