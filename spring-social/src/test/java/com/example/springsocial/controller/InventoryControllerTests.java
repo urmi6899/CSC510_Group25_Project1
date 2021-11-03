@@ -69,7 +69,7 @@ public class InventoryControllerTests {
 
     @Test
     void whenValidInput_thenReturns200() throws Exception {
-        String uri = "/getAllInventory";
+        String uri = "/getAllInventory?restaurant_id=r01";
 
         MvcResult mvcResult = mockMvc.perform(MockMvcRequestBuilders.get(uri)
                 .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();

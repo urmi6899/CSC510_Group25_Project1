@@ -81,7 +81,7 @@ public class OrderControllerTests {
 
     @Test
     void whenValidInput_thenReturns200() throws Exception {
-        String uri = "/getAllOrders";
+        String uri = "/getAllOrders?restaurant_id=r10";
         order = new Order();
         order.setOrderId("o10");
         order.setRestaurantId("r10");
