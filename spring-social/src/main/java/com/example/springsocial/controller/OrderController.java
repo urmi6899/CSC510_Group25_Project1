@@ -7,10 +7,7 @@ import com.google.gson.Gson;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.PostConstruct;
 import javax.validation.Valid;
@@ -69,9 +66,9 @@ public class OrderController {
     /**
      * This method is used to call all the orders in the inventory.
      */
-    public String getAllOrders(){
+    public String getAllOrders(@RequestParam String restaurant_id){
 
-        List<Order> order =  orderRepository.findAll();
+        List<Order> order =  orderRepository.findOrderByRestaurantId(restaurant_id);
         String orderJson = new Gson().toJson(order);
         logger.info("successfully fetched all the order");
         return orderJson;

@@ -20,11 +20,11 @@ public interface InventoryRepository extends JpaRepository<Inventory, String> {
 
     List<Inventory> findInventoryByRestaurantID(String restaurantId);
 
-    List<Inventory> findInventoryByRestaurantNameAndDateExpiredBetween(String restaurant_name, Date expiredStart, Date expiredEnd);
+    List<Inventory> findInventoryByRestaurantIDAndDateExpiredBetween(String restaurant_id, Date expiredStart, Date expiredEnd);
 
-    List<Inventory> findInventoryByRestaurantNameAndDateExpiredLessThan(String restaurant_name, Date expiredDate);
+    List<Inventory> findInventoryByRestaurantIDAndDateExpiredLessThan(String restaurant_id, Date expiredDate);
 
-    List<Inventory> findInventoryByRestaurantNameAndBatchQtyLessThanEqual(String restaurant_name, int maxQuantity);
+    List<Inventory> findInventoryByRestaurantIDAndBatchQtyLessThanEqual(String restaurant_id, int maxQuantity);
 
 }//    Optional<Inventory> findByRestaurant(String restaurantID);
 

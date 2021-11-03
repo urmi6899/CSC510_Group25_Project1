@@ -42,14 +42,14 @@ export default function NotificationsPage({ currentUser }) {
       return;
     }
     fetchExpiredInventoryItems({
-      "restaurant_name": currentUser.restaurantName,
+      "restaurant_id": currentUser.restaurant_id,
     }).then((response) => {
       // console.log(response);
       setExpiredItems(response);
     });
 
     fetchAboutToExpireInventoryItems({
-      "restaurant_name": currentUser.restaurantName,
+      "restaurant_id": currentUser.restaurant_id,
       "expires_in_days": NOTIFICATION_EXPIRY_DAYS,
     }).then((response) => {
       // console.log(response);
@@ -57,7 +57,7 @@ export default function NotificationsPage({ currentUser }) {
     });
 
     fetchLowQuantityInventoryItems({
-      "restaurant_name": currentUser.restaurantName,
+      "restaurant_id": currentUser.restaurant_id,
       "max_qty": NOTIFICATION_LOW_QUANTITY_THRESHOLD,
     }).then((response) => {
       // console.log(response);

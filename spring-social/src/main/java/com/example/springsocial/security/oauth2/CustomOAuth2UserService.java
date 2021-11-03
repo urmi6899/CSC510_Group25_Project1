@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import java.util.Optional;
+import java.util.UUID;
 
 @Service
 public class CustomOAuth2UserService extends DefaultOAuth2UserService {
@@ -71,6 +72,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         user.setEmail(oAuth2UserInfo.getEmail());
         user.setImageUrl(oAuth2UserInfo.getImageUrl());
         user.setRestaurantName("CSC510");
+        user.setRestaurant_id(UUID.randomUUID().toString());
         user.setRole("default_role");
         return userRepository.save(user);
     }

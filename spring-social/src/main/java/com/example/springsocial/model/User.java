@@ -17,6 +17,8 @@ public class User {
     @Column(nullable = false)
     private String restaurantName;
 
+    private String restaurant_id;
+
     @Column(nullable = false)
     private String name;
 
@@ -117,5 +119,13 @@ public class User {
 
     public void setProvider(String provider) {
         this.provider = provider;
+    }
+
+    public String getRestaurant_id() {
+        return restaurant_id;
+    }
+
+    public void setRestaurant_id(String restaurant_id) {
+        this.restaurant_id = restaurant_id;
     }
 }

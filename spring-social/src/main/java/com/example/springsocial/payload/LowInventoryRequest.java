@@ -7,7 +7,7 @@ import javax.validation.constraints.NotNull;
 public class LowInventoryRequest {
 
     @NotBlank
-    public String restaurant_name;
+    public String restaurant_id;
 
     @NotNull
     @Min(1)

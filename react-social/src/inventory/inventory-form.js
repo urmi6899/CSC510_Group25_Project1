@@ -9,15 +9,30 @@ import Dialog from '@material-ui/core/Dialog';
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import TextField from "@material-ui/core/TextField";
-import {API_BASE_URL} from "../constants";
+import { API_BASE_URL } from "../constants";
 import Alert from "react-s-alert";
 import DateFnsUtils from '@date-io/date-fns';
 
+const defaultState = {
+  itemName: "",
+  batchQty: 0,
+  costPerItem: 0,
+  dateBought: new Date(),
+  dateExpired: new Date(),
+  restaurantID: "",
+  itemID: "",
+  batchID: ""
+}
 class InventoryForm extends React.Component {
+
+  setDefaultState () {
+    this.setState(defaultState);
+  }
+
   constructor(props) {
     super(props);
 
-    this.state = { open: false, itemName: "", batchQty: 0, costPerItem: 0, dateBought: new Date(), dateExpired: new Date(), restaurantID: "", itemID: "", batchID: ""}
+    this.state = defaultState;
 
     this.handleChange = this.handleChange.bind(this);
     this.handleOpen = this.handleOpen.bind(this);
@@ -32,11 +47,11 @@ class InventoryForm extends React.Component {
   }
 
   handleClose() {
-    this.setState({open: false});
+    this.setState({ open: false });
   };
 
   handleOpen() {
-    this.setState({open: true});
+    this.setState({ open: true });
   };
 
   handleChange(event) {
@@ -45,55 +60,55 @@ class InventoryForm extends React.Component {
     const inputValue = target.value;
 
     this.setState({
-      [inputName] : inputValue
+      [inputName]: inputValue
     });
   };
 
   handleBoughtDateChange(date) {
-    this.setState({dateBought : date});
+    this.setState({ dateBought: date });
   }
   handleExpDateChange(date) {
-    this.setState({dateExpired : date});
+    this.setState({ dateExpired: date });
   }
-  generateRandomItemID(){
+  generateRandomItemID() {
     var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var result = ""
     var chaactersLength = characters.length;
 
-    for ( var i = 0; i < 3 ; i++ ) {
+    for (var i = 0; i < 3; i++) {
       result += characters.charAt(Math.floor(Math.random() * chaactersLength));
     }
-    this.setState({itemID : result.toString()});
+    this.setState({ itemID: result.toString() });
   }
-  generateRandomRestaurantID(){
+  generateRandomRestaurantID() {
     var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var result = ""
     var chaactersLength = characters.length;
 
-    for ( var i = 0; i < 3 ; i++ ) {
+    for (var i = 0; i < 3; i++) {
       result += characters.charAt(Math.floor(Math.random() * chaactersLength));
     }
     this.setState({restaurantID : result.toString()});
   }
-  generateRandomBatchID(){
+  generateRandomBatchID() {
     var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
     var result = ""
     var chaactersLength = characters.length;
 
-    for ( var i = 0; i < 3 ; i++ ) {
+    for (var i = 0; i < 3; i++) {
       result += characters.charAt(Math.floor(Math.random() * chaactersLength));
     }
-    this.setState({batchID : result.toString()});
+    this.setState({ batchID: result.toString() });
   }
 
-  handlePreSubmit(event){
+  handlePreSubmit(event) {
     this.generateRandomBatchID();
     this.generateRandomItemID();
     this.generateRandomRestaurantID();
-    if(this.state.batchID == "" && this.state.restaurantID == "" && this.state.itemID == ""){
+    if (this.state.batchID == "" && this.state.restaurantID == "" && this.state.itemID == "") {
       var millisecondsToWait = 500;
-      setTimeout(() =>{
-    // Whatever you want to do after the wait
+      setTimeout(() => {
+        // Whatever you want to do after the wait
         this.handleSubmit(event);
       }, millisecondsToWait);
     }
@@ -108,22 +123,24 @@ class InventoryForm extends React.Component {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        restaurantName : "demo",
-        restaurantID : this.state.restaurantID,
-        itemID : this.state.itemID,
-        itemName : this.state.itemName,
-        batchID : this.state.batchID,
-        batchQty : this.state.batchQty,
-        costPerItem : this.state.costPerItem,
-        dateBought : this.state.dateBought,
-        dateExpired : this.state.dateExpired
+        restaurantName: this.props.currentUser.restaurantName,
+        restaurantID: this.props.currentUser.restaurant_id,
+        itemID: this.state.itemID,
+        itemName: this.state.itemName,
+        batchID: this.state.batchID,
+        batchQty: this.state.batchQty,
+        costPerItem: this.state.costPerItem,
+        dateBought: this.state.dateBought,
+        dateExpired: this.state.dateExpired
       })
     })
       .then(response => {
-        this.setState({open: false});
+        this.setState({ open: false });
+        this.props.onFormSubmit();
+        this.setDefaultState();
       }).catch(error => {
-      Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
-    });
+        Alert.error((error && error.message) || 'Oops! Something went wrong. Please try again!');
+      });
   }
 
   render() {
@@ -134,7 +151,7 @@ class InventoryForm extends React.Component {
           Add New Inventory Item
         </Button>
         <Dialog open={this.state.open} onClose={this.handleClose}
-                aria-labelledby="form-dialog-title">
+          aria-labelledby="form-dialog-title">
           <DialogTitle id="form-dialog-title">Add New Inventory</DialogTitle>
           <DialogContent>
             <TextField
@@ -167,7 +184,7 @@ class InventoryForm extends React.Component {
               type="number"
               fullWidth
             />
-            <br/>
+            <br />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 label="Date Bought"
@@ -176,8 +193,8 @@ class InventoryForm extends React.Component {
                 name={"dateBought"}
               />
             </MuiPickersUtilsProvider>
-            <br/>
-            <br/>
+            <br />
+            <br />
             <MuiPickersUtilsProvider utils={DateFnsUtils}>
               <KeyboardDatePicker
                 label="Date Item(s) will expire"

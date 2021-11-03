@@ -5,6 +5,7 @@ CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `email` varchar(45) NOT NULL,
   `restaurantName` varchar(45) NOT NULL DEFAULT 'CSC510',
+  `restaurant_id` varchar(45) NOT NULL DEFAULT (uuid()),
   `name` varchar(45) NOT NULL,
   `role` varchar(45) NOT NULL,
   `password` varchar(255),

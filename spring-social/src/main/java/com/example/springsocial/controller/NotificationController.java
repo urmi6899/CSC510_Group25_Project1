@@ -25,21 +25,15 @@ public class NotificationController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    @GetMapping("/fetch-notifications")
-    public String fetchNotifications(@RequestParam("restaurant_id") String restaurant_id) {
 
-        // Fetch all inventory items that are about to expire
-
-        List<Inventory> inventoryItems = inventoryRepository.findInventoryByRestaurantID(restaurant_id);
-
-        String inventoryJson = new Gson().toJson(inventoryItems);
-
-        return inventoryJson;
-    }
-
+    /**
+     * API used to fetch inventory items that have expired for a particular restaurant
+     * @param notificationExpiredRequest
+     * @return JSON object with list of inventory items that have expired
+     */
     @PostMapping("/findExpiredInventory")
     public String fetchExpiredInventoryItems(@Valid @RequestBody NotificationExpiredRequest notificationExpiredRequest) {
-        List<Inventory> expiredInventoryItems = inventoryRepository.findInventoryByRestaurantNameAndDateExpiredLessThan(notificationExpiredRequest.restaurant_name, new Date());
+        List<Inventory> expiredInventoryItems = inventoryRepository.findInventoryByRestaurantIDAndDateExpiredLessThan(notificationExpiredRequest.restaurant_id, new Date());
 
         String inventoryItemsExpired = new Gson().toJson(expiredInventoryItems);
 
@@ -47,6 +41,11 @@ public class NotificationController {
 
     }
 
+    /**
+     * API used to fetch inventory items that are about to expire in the next N days
+     * @param notificationAboutToExpireRequest
+     * @return JSON object with list of inventory items that are about to expire
+     */
     @PostMapping("/findAboutToExpireInventory")
     public String fetchExpiredInventoryItems(@Valid @RequestBody NotificationAboutToExpireRequest notificationAboutToExpireRequest) {
 
@@ -56,7 +55,7 @@ public class NotificationController {
 
         logger.info("After date: " + dateAfterNDays.toString());
 
-        List<Inventory> aboutToExpireInventoryItems = inventoryRepository.findInventoryByRestaurantNameAndDateExpiredBetween(notificationAboutToExpireRequest.restaurant_name, new Date(), dateAfterNDays);
+        List<Inventory> aboutToExpireInventoryItems = inventoryRepository.findInventoryByRestaurantIDAndDateExpiredBetween(notificationAboutToExpireRequest.restaurant_id, new Date(), dateAfterNDays);
 
         String aboutToExpireInventoryItemsJSON = new Gson().toJson(aboutToExpireInventoryItems);
 
@@ -64,10 +63,15 @@ public class NotificationController {
 
     }
 
+    /**
+     * API used to fetch inventory items that have quantity less than N left
+     * @param lowInventoryRequest
+     * @return JSON object with list of inventory items that have low quantity
+     */
     @PostMapping("/findLowQuantityInventoryItems")
     public String fetchLowQuantityInventoryItems(@Valid @RequestBody LowInventoryRequest lowInventoryRequest) {
 
-        List<Inventory> lowQuantityItems = inventoryRepository.findInventoryByRestaurantNameAndBatchQtyLessThanEqual(lowInventoryRequest.restaurant_name, lowInventoryRequest.max_qty);
+        List<Inventory> lowQuantityItems = inventoryRepository.findInventoryByRestaurantIDAndBatchQtyLessThanEqual(lowInventoryRequest.restaurant_id, lowInventoryRequest.max_qty);
 
         String lowQuantityItemsJson = new Gson().toJson(lowQuantityItems);
 
