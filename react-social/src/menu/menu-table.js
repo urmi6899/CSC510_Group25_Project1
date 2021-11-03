@@ -260,6 +260,11 @@ export default function MenuTable(props) {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const fetchAllOrders = () => {
+
+    if(!(props && props.currentUser && props.currentUser.restaurant_id)) {
+      return;
+    }
+
     fetch(API_BASE_URL + `/getAllOrders?restaurant_id=${props.currentUser.restaurant_id}`, {
       method: 'Get',
       headers: {

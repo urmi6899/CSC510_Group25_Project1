@@ -262,6 +262,11 @@ export default function InventoryTable(props) {
   const emptyRows = rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
 
   const fetchInventory = () => {
+
+    if(!(props && props.currentUser && props.currentUser.restaurant_id)) {
+      return;
+    }
+
     fetch(API_BASE_URL + `/getAllInventory?restaurant_id=${props.currentUser.restaurant_id}`, {
       method: 'Get',
       headers: {
