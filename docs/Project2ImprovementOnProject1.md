@@ -44,6 +44,8 @@ We have successfully implemented for google and the rest are for future scope.
 
 The update profile page allows to change attributes of the user without changing the essential attributes like email and password , You can change the Name of the user , their role and the name of the resturant that belongs to them.
 
+<img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Update_profile.png">
+
 
 <br>
 <h1> Tests </h1>
