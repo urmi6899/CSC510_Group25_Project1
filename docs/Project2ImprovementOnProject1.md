@@ -163,7 +163,7 @@ Improved the Readme and code documentation where the instructions were not compl
 <br>
 <h1> ✅ Bugs </h1>
 
-<h3> 💎 Hardcoded ids in Inventory page </h3>
+<h3> 💎 Bug - Hardcoded ids in Inventory page </h3>
 
 There was a bug in application wherein the ids for Inventory table were hard-coded thus leading to just Patch request been sent evry second time. We fixed the bug to generate IDs randomly and update the react-state accordingly. <br>
 Sample code is below:
