@@ -84,7 +84,7 @@ The update profile page allows to change attributes of the user without changing
 <img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Update_profile.png">
 
 <br>
-<h1> ✅ Tests </h1>
+<h1> ✅ Tests and Formatting</h1>
 <h3>💎 Segregation of qty_calc test cases </h3>
 The Unit tests were all clubbed together making it very difficult to work on feature-specific test cases. We modularised the unit tests to map them to features and thus made the UT infra easily extensible for future group to add -on more test cases as and when new features develop.
 
@@ -125,15 +125,76 @@ We used maven sure-fire plugin to run all above added test files:
  
 <br>
 <h3>💎 Addition of Code Coverga Badge </h3>
-<p>We added codecov badge in the repo by integrating code cov tool with travis.yml. This badge gives us a good understanding on how well tested our software is. </p>
-<h3>Addition of Prettier for code formatting and syntax checker</h3>
-<p> We used Prettier an opinionated code formatter to enforce a consistent style by parsing our code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
-</p>
-
-
-
+We added codecov badge in the repo by integrating code cov tool with travis.yml. This badge gives us a good understanding on how well tested our software is. 
 <br>
-<h1> ✅ Documentation </h1>
+<br>
+<h3>💎 Addition of Prettier for code formatting and syntax checker</h3>
+We used Prettier an opinionated code formatter to enforce a consistent style by parsing our code and re-printing it with its own rules that take the maximum line length into account, wrapping code when necessary.
 
+```
+  {
+    "trailingComma": "es5",
+    "tabWidth": 2,
+    "semi": true,
+    "singleQuote": false
+  }
+```
+<h3> 💎 Addition of maven plugin for java formatting and styling </h3>
+We added below plugin for java style checking:
+
+```
+   <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-checkstyle-plugin</artifactId>
+                <version>3.0.0</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>checkstyle</goal>
+                        </goals>
+                    </execution>
+                </executions>
+    </plugin>
+
+```
+<h1> ✅ Documentation </h1>
+Improved the Readme and code documentation where the instructions were not complete or intuitive.
+<br>
 <br>
 <h1> ✅ Bugs </h1>
+
+<h3> 💎 Hardcoded ids in Inventory page </h3>
+
+There was a bug in application wherein the ids for Inventory table were hard-coded thus leading to just Patch request been sent evry second time. We fixed the bug to generate IDs randomly and update the react-state accordingly. <br>
+Sample code is below:
+
+```
+ generateRandomItemID() {
+    var characters = 'abcdefghijklmnopqrstuvwxyz0123456789';
+    var result = ""
+    var chaactersLength = characters.length;
+
+    for (var i = 0; i < 3; i++) {
+      result += characters.charAt(Math.floor(Math.random() * chaactersLength));
+    }
+    this.setState({ itemID: result.toString() });
+  }
+
+```
+
+Added random ids as part of react-state, and used the same while making server requests:
+
+```
+body: JSON.stringify({
+        restaurantName: this.props.currentUser.restaurantName,
+        restaurantID: this.props.currentUser.restaurant_id,
+        itemID: this.state.itemID,
+        itemName: this.state.itemName,
+        batchID: this.state.batchID,
+        batchQty: this.state.batchQty,
+        costPerItem: this.state.costPerItem,
+        dateBought: this.state.dateBought,
+        dateExpired: this.state.dateExpired
+      })
+
+```
