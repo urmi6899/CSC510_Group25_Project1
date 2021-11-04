@@ -38,7 +38,7 @@ export default function NotificationsPage({ currentUser }) {
 
   useEffect(() => {
 
-    if(!currentUser) {
+    if (!currentUser) {
       return;
     }
     fetchExpiredInventoryItems({
@@ -68,67 +68,82 @@ export default function NotificationsPage({ currentUser }) {
   const classes = useStyles();
 
   return <div>
-    <Box flexDirection="row-reverse">
-      {
-        expiredItems.map(item => {
-          return <Card className={classes.root} key={item.itemId}>
-            <CardContent>
-              <Typography className={classes.title} color="secondary" gutterBottom>
-                Expiration Alert!
-              </Typography>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {item.dateExpired}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                {item.itemName} has expired on {item.dateExpired}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                {item.batchQty} unit{item.batchQty > 1 ? "s have" : " has"} gone bad. Please order more.
-              </Typography>
-            </CardContent>
-          </Card>
-        })
-      }
-      {
-        aboutToExpireItems.map(item => {
-          return <Card className={classes.root} key={item.itemId}>
-            <CardContent>
-              <Typography className={classes.title} color="primary" gutterBottom>
-                Expiration Alert!
-              </Typography>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                {item.dateExpired}
-              </Typography>
-              <Typography variant="h5" component="h2">
-                {item.itemName} is about to expire on {item.dateExpired}
-              </Typography>
-              <Typography className={classes.pos} color="textSecondary">
-                {item.batchQty} unit{item.batchQty > 1 ? "s are" : " is"} about to expire. Order replacement soon!
-              </Typography>
-            </CardContent>
-          </Card>
-        })
-      }
-      {
-        lowQuantityItems.map(item => {
-          return <Card className={classes.root} key={item.itemId}>
-            <CardContent>
-              <Typography className={classes.title} color="secondary" gutterBottom>
-                Low Inventory Alert!
-              </Typography>
-              <Typography className={classes.title} color="textSecondary" gutterBottom>
-                Only {item.batchQty} unit{item.batchQty > 1 ? "s are" : " is"} left in stock.
-              </Typography>
-              <Typography variant="h5" component="h2">
-                It looks like some of your inventory is getting low
-              </Typography>
-              <Typography variant="h6" component="h2" color="textSecondary">
-                {item.itemName} quantity is low. Try checking quantity or restricting use.
-              </Typography>
-            </CardContent>
-          </Card>
-        })
-      }
-    </Box>
+    {
+      (expiredItems.length > 0 || aboutToExpireItems.length > 0 || lowQuantityItems.length > 0) ?
+        <Box flexDirection="row-reverse">
+          {
+            expiredItems.map(item => {
+              return <Card className={classes.root} key={item.itemId}>
+                <CardContent>
+                  <Typography className={classes.title} color="secondary" gutterBottom>
+                    Expiration Alert!
+                  </Typography>
+                  <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    {item.dateExpired}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    {item.itemName} has expired on {item.dateExpired}
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    {item.batchQty} unit{item.batchQty > 1 ? "s have" : " has"} gone bad. Please order more.
+                  </Typography>
+                </CardContent>
+              </Card>
+            })
+          }
+          {
+            aboutToExpireItems.map(item => {
+              return <Card className={classes.root} key={item.itemId}>
+                <CardContent>
+                  <Typography className={classes.title} color="primary" gutterBottom>
+                    Expiration Alert!
+                  </Typography>
+                  <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    {item.dateExpired}
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    {item.itemName} is about to expire on {item.dateExpired}
+                  </Typography>
+                  <Typography className={classes.pos} color="textSecondary">
+                    {item.batchQty} unit{item.batchQty > 1 ? "s are" : " is"} about to expire. Order replacement soon!
+                  </Typography>
+                </CardContent>
+              </Card>
+            })
+          }
+          {
+            lowQuantityItems.map(item => {
+              return <Card className={classes.root} key={item.itemId}>
+                <CardContent>
+                  <Typography className={classes.title} color="secondary" gutterBottom>
+                    Low Inventory Alert!
+                  </Typography>
+                  <Typography className={classes.title} color="textSecondary" gutterBottom>
+                    Only {item.batchQty} unit{item.batchQty > 1 ? "s are" : " is"} left in stock.
+                  </Typography>
+                  <Typography variant="h5" component="h2">
+                    It looks like some of your inventory is getting low
+                  </Typography>
+                  <Typography variant="h6" component="h2" color="textSecondary">
+                    {item.itemName} quantity is low. Try checking quantity or restricting use.
+                  </Typography>
+                </CardContent>
+              </Card>
+            })
+          }
+        </Box> :
+        <div style={{
+          display: 'flex',
+          width: '100vw',
+          height: '90vh',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}>
+          <div style={{ fontSize: "3rem" }}>
+            All caught up!✔
+          </div>
+        </div>
+    }
+
   </div>
 }
