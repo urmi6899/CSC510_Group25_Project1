@@ -83,6 +83,26 @@ The update profile page allows to change attributes of the user without changing
 
 <img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Update_profile.png">
 
+<h2>💎 Notifications Page</h2>
+
+The Notifications page informs restaurant administrators about potential events like low quantity of items in the inventory. items that are about to expire and items that have expired.
+
+Previously, this page was not fetching any data but only showing hard coded data. Now, we have implemented the fetching of notifications from the database. To implement this, 3 new APIs were added, which are:
+
+```
+  - fetchExpiredInventoryItems
+  - fetchLowQuantityInventoryItems
+  - fetchAboutToExpireInventoryItems
+```
+Following are the files added:
+```
+  spring-social/src/main/java/com/example/springsocial/controller/NotificationsController.java
+  spring-social/src/main/java/com/example/springsocial/payload/LowInventoryRequest.java
+  spring-social/src/main/java/com/example/springsocial/payload/NotificationAboutToExpireRequest.java
+  spring-social/src/main/java/com/example/springsocial/payload/NotificationExpiredRequest.java
+
+```
+
 <br>
 <h1> ✅ Tests and Formatting</h1>
 <h3>💎 Segregation of qty_calc test cases </h3>
