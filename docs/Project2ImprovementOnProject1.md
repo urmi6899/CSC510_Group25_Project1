@@ -192,7 +192,7 @@ We added below plugin for java style checking:
 
 ```
 <h1> ✅ Documentation </h1>
-Improved the Readme and code documentation where the instructions were not complete or intuitive.
+Improved the Readme and code documentation where the instructions were not complete or intuitive. The demo of the software has been revised and additional images have been added for illustration. Furthermore, additional information on how to run the software has been added where it was missing.
 <br>
 <br>
 <h1> ✅ Bug fixes </h1>
