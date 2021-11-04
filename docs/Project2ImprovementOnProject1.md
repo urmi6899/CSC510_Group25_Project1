@@ -90,9 +90,14 @@ The Notifications page informs restaurant administrators about potential events 
 Previously, this page was not fetching any data but only showing hard coded data. Now, we have implemented the fetching of notifications from the database. To implement this, 3 new APIs were added, which are:
 
 ```
-  - fetchExpiredInventoryItems
-  - fetchLowQuantityInventoryItems
-  - fetchAboutToExpireInventoryItems
+  - fetchExpiredInventoryItems(restaurantId)
+    // Fetches all expired inventory items for a restaurant
+
+  - fetchLowQuantityInventoryItems(restaurantId, maxQuantity)
+    // Fetches all inventory items for a restaurant that have a quantity less than maxQuantity
+
+  - fetchAboutToExpireInventoryItems(restaurantId, days)
+    // Fetches all inventory items for a restaurant that are about to expire in the next days
 ```
 Following are the files added:
 ```
@@ -102,6 +107,14 @@ Following are the files added:
   spring-social/src/main/java/com/example/springsocial/payload/NotificationExpiredRequest.java
 
 ```
+
+The new payload files define the classes that represent the signature of the API requests for the notification related APIs. The notification controller class is responsible for handling the requests and returning the response. It uses the spring data jpa methods to filter the inventory database appropriately. 
+
+The frontend fetches notification data on page load and renders it using the predefined classes for Box and Card components. 
+
+Additionally, we have added test cases for the notification controller class in accordance with the test design pattern. These tests now run on each push via the GitHub action defined in the root of the project.
+
+
 
 <br>
 <h1> ✅ Tests and Formatting</h1>
@@ -181,9 +194,9 @@ We added below plugin for java style checking:
 Improved the Readme and code documentation where the instructions were not complete or intuitive.
 <br>
 <br>
-<h1> ✅ Bugs </h1>
+<h1> ✅ Bug fixes </h1>
 
-<h3> 💎 Bug - Hardcoded ids in Inventory page </h3>
+<h3> 🐞 Bug - Hardcoded ids in Inventory page </h3>
 
 There was a bug in application wherein the ids for Inventory table were hard-coded thus leading to just Patch request been sent evry second time. We fixed the bug to generate IDs randomly and update the react-state accordingly. <br>
 Sample code is below:
@@ -218,3 +231,4 @@ body: JSON.stringify({
       })
 
 ```
+<h3> 🐞 Bug - Refresh required for reflecting inventory and menu items </h3>
