@@ -15,9 +15,18 @@ const useStyles = makeStyles({
 export default function AnalyticsPage() {
   const classes = useStyles();
 
-  return <div>
-    <Box className={classes.root}>
-      <Typography>Analytics</Typography>
-    </Box>
+  return <div style={{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '80%',
+  }}>
+    <div style={{
+      fontSize: '2rem',
+      marginTop: '7rem',
+    }}>
+      Nothing to see yet!
+    </div>
   </div>
 }

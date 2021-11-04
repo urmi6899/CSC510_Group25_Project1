@@ -67,7 +67,12 @@ export default function NotificationsPage({ currentUser }) {
 
   const classes = useStyles();
 
-  return <div>
+  return <div style={{
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'column',
+  }}>
     {
       (expiredItems.length > 0 || aboutToExpireItems.length > 0 || lowQuantityItems.length > 0) ?
         <Box flexDirection="row-reverse">

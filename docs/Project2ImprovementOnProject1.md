@@ -83,6 +83,40 @@ The update profile page allows to change attributes of the user without changing
 
 <img width="1200" alt="signup" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Update_profile.png">
 
+<h2>💎 Notifications Page</h2>
+
+The Notifications page informs restaurant administrators about potential events like low quantity of items in the inventory. items that are about to expire and items that have expired.
+
+Previously, this page was not fetching any data but only showing hard coded data. Now, we have implemented the fetching of notifications from the database. To implement this, 3 new APIs were added, which are:
+
+```
+  - fetchExpiredInventoryItems(restaurantId)
+    // Fetches all expired inventory items for a restaurant
+
+  - fetchLowQuantityInventoryItems(restaurantId, maxQuantity)
+    // Fetches all inventory items for a restaurant that have a quantity less than maxQuantity
+
+  - fetchAboutToExpireInventoryItems(restaurantId, days)
+    // Fetches all inventory items for a restaurant that are about to expire in the next days
+```
+Following are the files added:
+```
+  spring-social/src/main/java/com/example/springsocial/controller/NotificationsController.java
+  spring-social/src/main/java/com/example/springsocial/payload/LowInventoryRequest.java
+  spring-social/src/main/java/com/example/springsocial/payload/NotificationAboutToExpireRequest.java
+  spring-social/src/main/java/com/example/springsocial/payload/NotificationExpiredRequest.java
+
+```
+
+The new payload files define the classes that represent the signature of the API requests for the notification related APIs. The notification controller class is responsible for handling the requests and returning the response. It uses the spring data jpa methods to filter the inventory database appropriately. 
+
+The frontend fetches notification data on page load and renders it using the predefined classes for Box and Card components. 
+
+Additionally, we have added test cases for the notification controller class in accordance with the test design pattern. These tests now run on each push via the GitHub action defined in the root of the project.
+
+<img width="1200" alt="notification" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Notification.png" />
+
+
 <br>
 <h1> ✅ Tests and Formatting</h1>
 <h3>💎 Segregation of qty_calc test cases </h3>
@@ -161,9 +195,9 @@ We added below plugin for java style checking:
 Improved the Readme and code documentation where the instructions were not complete or intuitive.
 <br>
 <br>
-<h1> ✅ Bugs </h1>
+<h1> ✅ Bug fixes </h1>
 
-<h3> 💎 Bug - Hardcoded ids in Inventory page </h3>
+<h3> 🐞 Bug - Hardcoded ids in Inventory page </h3>
 
 There was a bug in application wherein the ids for Inventory table were hard-coded thus leading to just Patch request been sent evry second time. We fixed the bug to generate IDs randomly and update the react-state accordingly. <br>
 Sample code is below:
@@ -198,3 +232,10 @@ body: JSON.stringify({
       })
 
 ```
+<h3> 🐞 Bug - Refresh required for reflecting inventory and menu items </h3>
+
+In the previous implementation of the project, whenever a new item was added to the inventory or the list of orders, a page refresh was required to reflect the changes. This was not a good user experience. We fixed this by making the inventory and menu items refresh automatically when a new item is added. 
+
+This was particularly tricky to fix as the data for inventory and menu items was fetched at the component level instead of being passed as props. Moreover, the component that rendered the items and the component that adds inventory items were siblings. This required some extra callbacks to allow a siblings to communicate with each other.
+
+<img width="1200" alt="no_refresh" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/no_refresh.gif" />
