@@ -114,6 +114,7 @@ The frontend fetches notification data on page load and renders it using the pre
 
 Additionally, we have added test cases for the notification controller class in accordance with the test design pattern. These tests now run on each push via the GitHub action defined in the root of the project.
 
+<img width="1200" alt="notification" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/Notification.png" />
 
 
 <br>
@@ -232,3 +233,9 @@ body: JSON.stringify({
 
 ```
 <h3> 🐞 Bug - Refresh required for reflecting inventory and menu items </h3>
+
+In the previous implementation of the project, whenever a new item was added to the inventory or the list of orders, a page refresh was required to reflect the changes. This was not a good user experience. We fixed this by making the inventory and menu items refresh automatically when a new item is added. 
+
+This was particularly tricky to fix as the data for inventory and menu items was fetched at the component level instead of being passed as props. Moreover, the component that rendered the items and the component that adds inventory items were siblings. This required some extra callbacks to allow a siblings to communicate with each other.
+
+<img width="1200" alt="no_refresh" src="https://github.com/ashakhatri007/CSC510_Group25_Project1/blob/main/images/no_refresh.gif" />
