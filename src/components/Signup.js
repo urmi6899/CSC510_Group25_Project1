@@ -12,7 +12,7 @@ class Signup extends Component {
       password: '',
       name: '',
       confirmPassword: '',
-      role: ''
+      restname: ''
     };
   }
 
@@ -28,11 +28,11 @@ class Signup extends Component {
 
   onFormSubmit = (e) => {
     e.preventDefault();
-    const { email, password, confirmPassword, name, role } = this.state;
+    const { email, password, confirmPassword, name, restname } = this.state;
 
-    if (email && password && confirmPassword && name && role) {
+    if (email && password && confirmPassword && name && restname) {
       this.props.dispatch(startSingup());
-      this.props.dispatch(signup(email, password, confirmPassword, name, role));
+      this.props.dispatch(signup(email, password, confirmPassword, name, restname));
     }
   };
 
@@ -74,6 +74,14 @@ class Signup extends Component {
         </div>
         <div className="field">
           <input
+            placeholder="Restaurant Name"
+            type="restname"
+            required
+            onChange={(e) => this.handleInputChange('restname', e.target.value)}
+          />
+        </div>
+        <div className="field">
+          <input
             placeholder="Password"
             type="password"
             required
@@ -90,10 +98,9 @@ class Signup extends Component {
             onChange={(e) => this.handleInputChange('password', e.target.value)}
           />
         </div>
-        <select value={this.state.role} onChange={(e) => this.handleInputChange('role', e.target.value)}  style={{border:'1px solid rgba(0,0,0,0.12',boxSizing:'border-box',borderRadius:'6px',width:'100%',height:'40px',marginTop:'20px',padding:'5px',fontSize:'15px'}}>
-          <option value="Manager" >Manager</option>
-          <option value="Applicant">Applicant</option>
-        </select>
+
+       
+        
         <div className="field">
           <button onClick={this.onFormSubmit} disabled={inProgress}>
             Signup
