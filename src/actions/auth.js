@@ -152,13 +152,7 @@ export function editUser(
   password,
   confirmPassword,
   userId,
-  role,
-  address,
-  phonenumber,
-  hours,
-  dob,
-  gender,
-  skills
+  
 ) {
   return (dispatch) => {
     const url = APIURLS.editProfile();
@@ -174,13 +168,7 @@ export function editUser(
         password,
         confirm_password: confirmPassword,
         id: userId,
-        role,
-        address,
-        phonenumber,
-        hours,
-        dob,
-        gender,
-        skills,
+        
       }),
     })
       .then((response) => response.json())

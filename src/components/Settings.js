@@ -27,11 +27,11 @@ class Settings extends Component {
   
   handleSave = () => {
 
-    const {password, confirmPassword, name,restname} = this.state;
+    const {password, confirmPassword, name} = this.state;
 
     const {user} = this.props.auth;
 
-    this.props.dispatch(editUser(name,password,confirmPassword,user._id,restname))
+    this.props.dispatch(editUser(name,password,confirmPassword,user._id))
 
   }
 
