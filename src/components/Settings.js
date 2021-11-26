@@ -13,13 +13,7 @@ class Settings extends Component {
       password: '',
       confirmPassword: '',
       editMode: false,
-      role:'',
-      address:'',
-      phonenumber:'',
-      hours:'',
-      dob:'',
-      gender:'',
-      skills:''
+      restname:''
     };
   }
 
@@ -33,11 +27,11 @@ class Settings extends Component {
   
   handleSave = () => {
 
-    const {password, confirmPassword, name,address,phonenumber,hours,dob,gender,skills} = this.state;
+    const {password, confirmPassword, name,restname} = this.state;
 
     const {user} = this.props.auth;
 
-    this.props.dispatch(editUser(name,password,confirmPassword,user._id,user.role,address,phonenumber,hours,dob,gender,skills))
+    this.props.dispatch(editUser(name,password,confirmPassword,user._id,restname))
 
   }
 
@@ -63,6 +57,11 @@ class Settings extends Component {
         <div className="field">
           <div className="field-label">Email</div>
           <div className="field-value">{user.email}</div>
+        </div>
+
+        <div className="field">
+          <div className="field-label">Restaurant Name</div>
+          <div className="field-value">{user.restname}</div>
         </div>
 
         <div className="field">
@@ -99,90 +98,8 @@ class Settings extends Component {
             />
           </div>
         )}
-        <div className="field">
-          <div className="field-label">Address</div>
-          {editMode ? (
-            <input
-              type="text"
-              onChange={(e) => this.handleChange('address',e.target.value)}
-              value={this.state.address}
-              placeholder='Address'
-            />
-          ) : (
-            
-            <div className="field-value">{user.address}</div>
-          )}
-        </div>
-        <div className="field">
-          <div className="field-label">Phone Number</div>
-          {editMode ? (
-            <input
-              type="text"
-              onChange={(e) => this.handleChange('phonenumber',e.target.value)}
-              value={this.state.phonenumber}
-              placeholder='Phone Number'
-            />
-          ) : (
-            
-            <div className="field-value">{user.phonenumber}</div>
-          )}
-        </div>
-        <div className="field">
-          <div className="field-label">Available Hours</div>
-          {editMode ? (
-            <input
-              type="text"
-              onChange={(e) => this.handleChange('hours',e.target.value)}
-              value={this.state.hours}
-              placeholder='Hours'
-            />
-          ) : (
-            
-            <div className="field-value">{user.hours}</div>
-          )}
-        </div>
-        <div className="field">
-          <div className="field-label">DOB</div>
-          {editMode ? (
-            <input
-              type="text"
-              onChange={(e) => this.handleChange('dob',e.target.value)}
-              value={this.state.dob}
-              placeholder='DOB'
-            />
-          ) : (
-            
-            <div className="field-value">{user.dob}</div>
-          )}
-        </div>
-        <div className="field">
-          <div className="field-label">Gender</div>
-          {editMode ? (
-            <input
-              type="text"
-              onChange={(e) => this.handleChange('gender',e.target.value)}
-              value={this.state.gender}
-              placeholder='Gender'
-            />
-          ) : (
-            
-            <div className="field-value">{user.gender}</div>
-          )}
-        </div>
-        <div className="field">
-          <div className="field-label">Skills</div>
-          {editMode ? (
-            <input
-              type="text"
-              onChange={(e) => this.handleChange('skills',e.target.value)}
-              value={this.state.skills}
-              placeholder='Skills'
-            />
-          ) : (
-            
-            <div className="field-value">{user.skills}</div>
-          )}
-        </div>
+        
+        
 
         <div className="btn-grp">
             {editMode ? <button className="button save-btn" onClick={this.handleSave} >Save</button> :
