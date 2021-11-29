@@ -41,46 +41,33 @@ class Job extends Component {
               
               <div >
                 <h4 style={{display:'inline-block'}}>Job Name : </h4> 
-                <span style={{marginLeft:'10px'}}>{job.name}</span>
+                <span style={{marginLeft:'10px'}}>{job.restname}</span>
                   </div>
 
-                  <div >
-                <h4 style={{display:'inline-block',marginTop:'-12px'}}>Status : </h4> 
-                {job.status == '0' && <span style={{marginLeft:'10px'}}>Open</span> }
-                {job.status == '1' && <span style={{marginLeft:'10px'}}>Closed</span> }
-
-                
-                  </div>
 
                   <div >
                 <h4 style={{display:'inline-block',marginTop:'-12px'}}>Location : </h4> 
-                <span style={{marginLeft:'10px'}}>{job.location}</span>
+                <span style={{marginLeft:'10px'}}>{job.itemname}</span>
                   </div>
 
                   <div >
+                    
                 <h4 style={{display:'inline-block',marginTop:'-12px'}}>Description : </h4> 
-                <span style={{marginLeft:'10px'}}>{job.description}</span>
+                <span style={{marginLeft:'10px'}}>{job.costperitem}</span>
                   </div>
 
                   <div >
                 <h4 style={{display:'inline-block',marginTop:'-12px'}}>Pay : </h4> 
-                <span style={{marginLeft:'10px'}}>{job.pay}</span>
+                <span style={{marginLeft:'10px'}}>{job.dateexpired}</span>
                   </div>
 
                   <div >
                 <h4 style={{display:'inline-block',marginTop:'-12px'}}>Schedule : </h4> 
-                <span style={{marginLeft:'10px'}}>{job.schedule}</span>
+                <span style={{marginLeft:'10px'}}>{job.datebought}</span>
                   </div>
                 
                 
-                  
-             
-            {isLoggedIn && user.role == 'Applicant' && <div className="field">
-        <button className="button save-btn" onClick={this.handleApply} style={{width:'50%'}}>Apply</button>
-        </div> }
-        {isLoggedIn && user.role == 'Manager' && user._id == job.managerid && <div className="field">
-        <button className="button save-btn" onClick={this.handleApply1} style={{width:'50%'}}>Close this job</button>
-        </div> }
+              
             
             </div>
           </div>

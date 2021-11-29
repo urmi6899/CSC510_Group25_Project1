@@ -9,6 +9,8 @@ import 'react-datepicker/dist/react-datepicker.css';
 
 import Widgets from './Widgets.js';
 import {createJob} from '../actions/job';
+import { fetchJobs } from '../actions/job';
+import Job from './Job';
 
 
 class Goal extends Component {
@@ -16,14 +18,13 @@ class Goal extends Component {
         super(props);
     
         this.state = {
-          name:'',
-          skills: '',
-          managerid:'',
-          status:'0',
-          location:'',
-          description:'',
-          pay:'',
-          schedule:'',
+          restname:'',
+          restid: '',
+          itemname:'',
+          quantity:'0',
+          costperitem:'',
+          datebought:'',
+          dateexpired:'',
           editMode: false,
         };
       }
@@ -58,92 +59,115 @@ class Goal extends Component {
     
   handleSave = () => {
 
-    const {name,skills,status,location,description,pay,schedule} = this.state;
+    const {restname,restid,itemname,quantity,costperitem,datebought,dateexpired} = this.state;
 
     const {user} = this.props.auth;
 
-    this.props.dispatch(createJob(name,skills,user._id,status,location,description,pay,schedule))
+    this.setState({
+      restname: user.restname,
+      restid:user._id
+    })
 
+    this.props.dispatch(createJob(user.restname,user._id,itemname,quantity,costperitem,datebought,dateexpired))
+
+    this.setState({
+      itemname:''
+    })
+    
   }
+
+  componentDidMount() {
+    this.props.dispatch(fetchJobs());
+  }
+
 
     
     
     render() {
        
       const {error} = this.props.auth;
+      const {user} = this.props.auth;
+      const {job} = this.props;
         
         
         return (
             <div>
                 
            <div className="goal-form" style={{width:'600px',height:'500px',marginLeft:'100px'}} >
-           <span className="login-signup-header">Add Job</span>
+           <span className="login-signup-header">Add Inventory</span>
             {error && <div className="alert error-dailog">{error}</div>}
             
             {/* <form className="login-form"> */}
 
             <div className="field">
+              
           <input
-            placeholder="Job Name"
+            placeholder="Item Name"
             type="text"
             required
-            onChange={(e) => this.handleInputChange('name', e.target.value)}
+            onChange={(e) => this.handleInputChange('itemname', e.target.value)}
           />
         </div>
 
         <div className="field">
           <input
-            placeholder="Skills"
+            placeholder="Quantity"
             type="text"
             required
-            onChange={(e) => this.handleInputChange('skills', e.target.value)}
+            onChange={(e) => this.handleInputChange('quantity', e.target.value)}
           />
         </div>
 
         <div className="field">
           <input
-            placeholder="Location"
+            placeholder="Cost per item"
             type="text"
             required
-            onChange={(e) => this.handleInputChange('location', e.target.value)}
+            onChange={(e) => this.handleInputChange('costperitem', e.target.value)}
           />
         </div>
         <div className="field">
           <input
-            placeholder="Description"
+            placeholder="Date Bought"
             type="text"
             required
-            onChange={(e) => this.handleInputChange('description', e.target.value)}
+            onChange={(e) => this.handleInputChange('datebought', e.target.value)}
           />
         </div>
 
         <div className="field">
           <input
-            placeholder="Pay"
+            placeholder="Date Expired"
             type="text"
             required
-            onChange={(e) => this.handleInputChange('pay', e.target.value)}
+            onChange={(e) => this.handleInputChange('dateexpired', e.target.value)}
           />
         </div>
 
-        <div className="field">
+        {/* <div className="field">
           <input
             placeholder="Schedule"
             type="text"
             required
             onChange={(e) => this.handleInputChange('schedule', e.target.value)}
           />
-        </div>
+        </div> */}
         
         
         <div className="field">
         <button className="button save-btn" onClick={this.handleSave} >Save</button>
         </div>
         
+        
 
         </div>
+        <div>
+        {job.map((job) => (
+          <Job job={job} />
+        ))}
+        </div>
         
-                <Widgets style={{marginTop:'1000px'}}/>
+               
         
         </div>
         
@@ -158,6 +182,7 @@ function mapStateToProps(state) {
     return {
       auth: state.auth,
       results: state.search.results,
+      job:state.job,
     };
   }
   

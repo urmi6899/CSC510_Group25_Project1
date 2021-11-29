@@ -13,14 +13,7 @@ import {
 
 
 export function createJob(
-    name,
-    skills,
-    userId,
-    status,
-    location,
-    description,
-    pay,
-    schedule
+    restname,restid,itemname,quantity,costperitem,datebought,dateexpired
   ) {
     return (dispatch) => {
       const url = APIURLS.createJob();
@@ -30,14 +23,13 @@ export function createJob(
           "Content-Type": "application/x-www-form-urlencoded",
         },
         body: getFormBody({
-          name,
-          id: userId,
-          skills,
-          status,
-          location,
-          description,
-          pay,
-          schedule,
+          restname,
+          id: restid,
+          itemname,
+          quantity,
+          costperitem,
+          datebought,
+          dateexpired
         }),
       })
         .then((response) => response.json())

@@ -98,20 +98,20 @@ class Navbar extends React.Component {
                 <HomeIcon fontSize="large" />
               </Link>
             </div>
-            {user.role == "Manager" && (
+            
               <div className="header__option ">
                 <Link to="/goal">
                   <WorkIcon fontSize="large" />
                 </Link>
               </div>
-            )}
-            {user.role == "Manager" && (
+            
+           
               <div className="header__option ">
                 <Link to="/history">
                   <ListAltIcon fontSize="large" />
                 </Link>
               </div>
-            )}
+            
             {user.role == "Applicant" && (
               <div className="header__option ">
                 <Link to="/applicationinfo">

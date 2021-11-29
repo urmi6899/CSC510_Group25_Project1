@@ -5,7 +5,7 @@ export const APIURLS = {
 
     login: () => `${API_ROOT}/users/create-session`,
     signup: () => `${API_ROOT}/users/signup`,
-    fetchJobs: (page=1, limit=25) => `${API_ROOT}/users?page=${page}&limit=${limit}`,
+    fetchJobs: () => `${API_ROOT}/users/`,
     editProfile : () => `${API_ROOT}/users/edit`,
     
     createJob: () => `${API_ROOT}/users/createjob`,
